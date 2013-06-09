@@ -11,41 +11,43 @@ mixin badge(region)
         span.badge.badge-important #{region}
     else
         span.badge #{region}
-        
 
-div#add_new
-    form(method='POST', action='/movies/create')
-        input#title(type='text', name='title', placeholder='title')
-        input#original_title(type='text', name='original_title', placeholder='Original Title')
-        select#region(name='region')
-            option(value=0) No region
-            option(value=1) Region 1
-            option(value=2) Region 2
-            option(value=3) Region 3
-            option(value=4) Region 4
-            option(value=5) Region 5
-            option(value=6) Region 6
-            option(value=7) Region 7
-            option(value=8) Region 8
-            option(value=9) Region 9
-        input#submit(type='submit', value='Add movie')
+if (admin)
+    div#add_new
+        form(method='POST', action='/movies/create')
+            input#title(type='text', name='title', placeholder='title')
+            input#original_title(type='text', name='original_title', placeholder='Original Title')
+            select#region(name='region')
+                option(value=0) No region
+                option(value=1) Region 1
+                option(value=2) Region 2
+                option(value=3) Region 3
+                option(value=4) Region 4
+                option(value=5) Region 5
+                option(value=6) Region 6
+                option(value=7) Region 7
+                option(value=8) Region 8
+                option(value=9) Region 9
+            input#submit(type='submit', value='Add movie')
 
-    .well
-        table.table.table-hover.table-striped.table-condensed
-            thead
-                td title
-                td Original Title
-                td Region
+.well
+    table.table.table-hover.table-striped.table-condensed
+        thead
+            td title
+            td Original Title
+            td Region
+            if (admin)
                 td
-            tbody
-                - each m in movies
-                    tr.movie
-                        td
-                            = m.title
-                        td
-                            = m.original_title
-                        td
-                            mixin badge(m.region)
+        tbody
+            - each m in movies
+                tr.movie
+                    td
+                        = m.title
+                    td
+                        = m.original_title
+                    td
+                        mixin badge(m.region)
+                    if (admin)
                         td
                             a(href="/movies/delete/#{m.id}", class='delete')
-                                span.label.label-important Delete
+                               span.label.label-important Delete
