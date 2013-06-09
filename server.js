@@ -6,7 +6,8 @@ var express = require('express'),
 require('./db');
 
 app.configure(function() {
-    app.use(express.logger());
+    var logFile = fs.createWriteStream('./logs/application.log', {flags: 'a'});
+    app.use(express.logger({stream: logFile}));
     app.use(express.static(__dirname + '/public'));
     app.set('view engine', 'jade');
     app.set('views', __dirname + '/views');
