@@ -1,0 +1,10 @@
+#add_new {
+    top: 60px;
+    position: relative;
+}
+
+#message {
+    display: none;
+    position: relative;
+    top: 40px;
+}
